@@ -41,6 +41,7 @@ const createSlug = (name) => {
     return slug;
 }
 
+
 // Creo una funzione per l'eliminazione del file da public
 const deletePublicFile = (fileName) => {
     const filePath = path.join(__dirname, './public', fileName);

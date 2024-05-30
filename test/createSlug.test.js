@@ -1,6 +1,8 @@
 // Importo Jest
 const { test, expect } = require("@jest/globals");
 
+// const createSlug = require('../utils.js')
+
 const createSlug = (str) => {
 
     const regex = /[!@#$%^&*()\-+={}[\]:;"'<>,.?\/|\\]/;
@@ -30,6 +32,7 @@ const createSlug = (str) => {
     return slug;
 
 } 
+
 
 // Resetto l'array slugs prima di ogni test
 beforeEach(() => {
