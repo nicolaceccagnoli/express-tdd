@@ -6,7 +6,13 @@ let slugs = [];
 
 const createSlug = (str) => {
 
-    const slugBase = str.toLowerCase().replaceAll(' ', '-');
+    const regex = /[!@#$%^&*()\-+={}[\]:;"'<>,.?\/|\\]/;
+
+    if (regex.test(str) || str.trim() === '') {
+        throw new Error('La stringa non deve contenere caratteri speciali o non deve essere vuota');
+    }
+
+    const slugBase = str.toLowerCase().replaceAll(' ', '-').trim();
 
     let counter = 1;
 
@@ -62,4 +68,12 @@ test('createSlug dovrebbe incrementare di 1 lo slug quando esiste già', () => {
     const slug2 = createSlug('Hello World');
 
     expect(slug2).toBe('hello-world-1');
+})
+
+// createSlug dovrebbe lanciare un errore in caso di titolo non presente o formato errato
+test('createSlug dovrebbe lanciare un errore in caso di titolo non presente o formato errato', () => {
+
+    expect(() => createSlug('Hell@ World')).toThrow();
+
+    expect(() => createSlug('')).toThrow();
 })
