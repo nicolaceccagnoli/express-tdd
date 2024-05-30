@@ -1,11 +1,12 @@
-# express-blog-auth
+# express-tdd
 
-Creiamo le seguenti rotte:
-home
-posts/ (index)
-posts/ (store)
-posts/:slug (show)
-Tramite JTW creiamo una rotta per autenticare un utente ed ottenere il Token JWT e tramite un middleware limitiamo l'accesso alla rota store dei post ai soli utenti loggati.
-Gestiamo, attraverso dei middlewares, gli errori e le pagine 404.
-Questi middleware dovranno rispondere con un json contente il codice ed il messaggio dell'errore.
-Svolgiamo tutto l'esercizio tramite relativi controller e router.
+Impariamo a ragionare in ottica TDD e a scrivere i nostri Unit Tests.
+Creiamo i test per la nostra funzione createSlug che crea gli slug dei nostri post ricevendo come argomento il titolo da convertire e la lista di tutti i post.
+Eseguiamo i seguenti test:
+createSlug dovrebbe ritornare una stringa
+createSlug dovrebbe ritornare una stringa in lowercase
+createSlug dovrebbe ritornare una stringa con gli spazi sostituiti da -
+createSlug dovrebbe incrementare di 1 lo slug quando esiste già
+createSlug dovrebbe lanciare un errore in caso di titolo non presente o formato errato
+createSlug dovrebbe lanciare un errore se manca l'array dei post
+Lavoriamo in ottica TDD, quindi prima scriviamo il singolo test, e dopo scriviamo il codice necessario per far superare il nostro test.
