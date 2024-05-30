@@ -1,12 +1,13 @@
 // Importo Jest
 const { test, expect } = require("@jest/globals");
 
-// Definisco un array per gli slugs
-let slugs = [];
-
 const createSlug = (str) => {
 
     const regex = /[!@#$%^&*()\-+={}[\]:;"'<>,.?\/|\\]/;
+
+    if (!posts) {
+        throw new Error('Array degli slug non trovato');
+    }
 
     if (regex.test(str) || str.trim() === '') {
         throw new Error('La stringa non deve contenere caratteri speciali o non deve essere vuota');
@@ -14,17 +15,17 @@ const createSlug = (str) => {
 
     const slugBase = str.toLowerCase().replaceAll(' ', '-').trim();
 
-    let counter = 1;
-
     let slug = slugBase;
 
-    while(slugs.includes(slug)) {
+    let counter = 1;
+
+    while(posts.includes(slug)) {
         slug = `${slugBase}-${counter}`;
 
         counter++;
     }
 
-    slugs.push(slug);
+    posts.push(slug);
 
     return slug;
 
@@ -32,7 +33,7 @@ const createSlug = (str) => {
 
 // Resetto l'array slugs prima di ogni test
 beforeEach(() => {
-    slugs = [];
+    posts = [];
 });
 
 
@@ -76,4 +77,12 @@ test('createSlug dovrebbe lanciare un errore in caso di titolo non presente o fo
     expect(() => createSlug('Hell@ World')).toThrow();
 
     expect(() => createSlug('')).toThrow();
+})
+
+// createSlug dovrebbe lanciare un errore se manca l'array dei post
+test('createSlug dovrebbe lanciare un errore se manca l\'array dei post', () => {
+
+    posts = undefined;
+
+    expect(() => createSlug('ciao')).toThrow();
 })
